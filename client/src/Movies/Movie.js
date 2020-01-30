@@ -36,14 +36,15 @@ export default class Movie extends Component {
 		axios
 			.delete(`http://localhost:5000/api/movies/${this.state.movie.id}`)
 			.then(res => {
-        this.props.setMovies(res.data);
-        this.props.history.push("/");
-      })
+				console.log(res);
+				this.props.setMovies(res.data);
+				this.props.history.push("/");
+			})
 			.catch(err => console.log(err));
-  };
-  
-  handleEdit = () =>
-  this.props.history.push(`/update-movie/${this.state.movie.id}`)
+	};
+
+	handleEdit = () =>
+		this.props.history.push(`/update-movie/${this.state.movie.id}`);
 
 	render() {
 		if (!this.state.movie) {
@@ -56,14 +57,8 @@ export default class Movie extends Component {
 				<div className="save-button" onClick={this.saveMovie}>
 					Save
 				</div>
-				<div>
-					<button
-						onClick={this.handleEdit}
-					>
-						Edit Movie
-					</button>
-					<button onClick={this.handleDelete}>Delete Movie</button>
-				</div>
+				<button onClick={this.handleEdit}>Edit Movie</button>
+				<button onClick={this.handleDelete}>Delete Movie</button>
 			</div>
 		);
 	}
